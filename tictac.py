@@ -1,5 +1,5 @@
 version = "0.1"
-board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
 
 def draw_board(b):
@@ -70,11 +70,36 @@ def make_move(cell, sign, board):
     pass
 
 
-draw_intro()
-nop = get_number_of_players()
-pl_name1, pl_name2 = get_player_name(nop)
-sign = get_the_sign()
+def end_of_game(b):
+    # check horizontals
+    if b[0] == b[1] == b[2] == 'x' or b[0] == b[1] == b[2] == 'o':
+        return True
+    if b[3] == b[4] == b[5] == 'x' or b[3] == b[4] == b[5] == 'o':
+        return True
+    if b[6] == b[7] == b[8] == 'x' or b[6] == b[7] == b[8] == 'o':
+        return True
+    # check verticals
+    if b[0] == b[3] == b[6] == 'x' or b[0] == b[3] == b[6] == 'o':
+        return True
+    if b[1] == b[4] == b[7] == 'x' or b[1] == b[4] == b[7] == 'o':
+        return True
+    if b[2] == b[5] == b[8] == 'x' or b[2] == b[5] == b[8] == 'o':
+        return True
+    # check diagonals
+    if b[0] == b[4] == b[8] == 'x' or b[0] == b[4] == b[8] == 'o':
+        return True
+    if b[2] == b[4] == b[5] == 'x' or b[2] == b[4] == b[5] == 'o':
+        return True
+    return False
 
-move = int(input(pl_name1 + ", enter cell number to make your move: ")) - 1
-make_move(move, sign, board)
-draw_board(board)
+
+draw_intro()
+# nop = get_number_of_players()
+# pl_name1, pl_name2 = get_player_name(nop)
+# sign = get_the_sign()
+
+while not end_of_game(board):
+    move = int(input("enter cell number to make your move: ")) - 1
+    make_move(move, 'x', board)
+    draw_board(board)
+    end_of_game(board)
