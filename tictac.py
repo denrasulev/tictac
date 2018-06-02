@@ -16,9 +16,22 @@ def draw_board(b):
 def draw_intro():
     """Prints out game intro and rules"""
 
-    print("\nTicTacToe v{}. ©2018 Denis Rasulev.".format(version))
-    print("---")
-    print("Rules:")
+    intro = """
+TicTacToe v0.1. ©2018 Denis Rasulev.
+    
+1. Enter number of human players ('1' or '2')
+   (1 to play with computer or 2 to play with friend)
+2. Select the sign for the Player 1 (X or O).
+3. Play by entering number of the cell in your turn:
+"""
+    print(intro)
+
+    intro_board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    draw_board(intro_board)
+
+    start = input("\nShall we start (y/n)? ")
+    if start == 'n':
+        exit()
 
 
 def get_number_of_players():
@@ -34,14 +47,34 @@ def get_number_of_players():
     return num_of_players
 
 
-def get_player_name(player=""):
-    name = input(f"How shall I call {player}? : ")
-    return name
+def get_player_name(number, name1='', name2=''):
+    name1 = input("How shall I call first player? : ")
+    if number == 2:
+        name2 = input("How shall I call second player? : ")
+    return name1, name2
+
+
+def get_the_sign():
+    ok = False
+    while not ok:
+        the_sign = input("Select sign for the first player (X or O): ")
+        if the_sign not in ['x', 'o']:
+            print("Please, enter X or O!")
+        if the_sign in ['x', 'o']:
+            ok = True
+    return the_sign
+
+
+def make_move(cell, sign, board):
+    board[cell] = sign
+    pass
 
 
 draw_intro()
-draw_board(board)
 nop = get_number_of_players()
-print(nop)
-pl1_name = get_player_name("Player 1")
-print(pl1_name)
+pl_name1, pl_name2 = get_player_name(nop)
+sign = get_the_sign()
+
+move = int(input(pl_name1 + ", enter cell number to make your move: ")) - 1
+make_move(move, sign, board)
+draw_board(board)
