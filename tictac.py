@@ -141,9 +141,9 @@ while True:
     turn = who_goes_first()
     print('Randomizing on who goes first...')
     print('The ' + turn + ' will go first.')
-    gameIsPlaying = True
+    game = True
 
-    while gameIsPlaying:
+    while game:
         if turn == 'player':
             # Player’s turn.
             draw_board(main_board)
@@ -153,7 +153,7 @@ while True:
             if end_of_game(main_board, playerLetter):
                 draw_board(main_board)
                 print('Hooray! You have won the game!')
-                gameIsPlaying = False
+                game = False
             else:
                 if is_board_full(main_board):
                     draw_board(main_board)
@@ -170,7 +170,7 @@ while True:
             if end_of_game(main_board, computerLetter):
                 draw_board(main_board)
                 print('The computer has beaten you! You lose.')
-                gameIsPlaying = False
+                game = False
 
             else:
                 if is_board_full(main_board):
